@@ -91,20 +91,51 @@
                 // calculation of total deposit
                 let totalDeposit=dipositAmount+oldDeposit;
                 // Calculation of total money
-                let totalMoney=oldTotal+dipositAmount;
+                let totalMoneyDipo=oldTotal+dipositAmount;
                 // pushing the total value to diposit field
                 document.getElementById("deposit-money").innerText=totalDeposit;
                 // pushing the value to total field
-                document.getElementById("total-money").innerText=totalMoney;
+                document.getElementById("total-money").innerText=totalMoneyDipo;
                 
-                console.log("new diposit=", dipositAmount)
-                console.log("old diposit=",oldDeposit)
-                console.log("total diposit=",totalDeposit)
-                console.log("Old total",oldTotal);
-                console.log("New Total",totalMoney)
+                // console.log("new diposit=", dipositAmount)
+                // console.log("old diposit=",oldDeposit)
+                // console.log("total diposit=",totalDeposit)
+                // console.log("Old total",oldTotal);
+                // console.log("New Total",totalMoneyDipo)
 
             })
-            
+
+            //Withdrawn event Handler
+            const withdrawClick=document.getElementById("withdrawClick");
+            withdrawClick.addEventListener("click",function(){
+                // taking input value from withdraw input field
+                let withdrawAmount= document.getElementById("money-withdrawn").value;
+                withdrawAmount=parseFloat(withdrawAmount);
+                // restoration of input field
+                document.getElementById("money-withdrawn").value="";
+                // accessing the value of old withdraw
+                let oldWithdraw=document.getElementById("withdrawn-money").innerText;
+                oldWithdraw=parseFloat(oldWithdraw);
+                // accessing the value of old total
+                let oldTotal=document.getElementById("total-money").innerText;
+                oldTotal=parseFloat(oldTotal);
+                // calculation of total withdrawn amount
+                let totalWithdrawn = withdrawAmount + oldWithdraw ;
+                // Calculation of total money
+                let totalMoneyWith = oldTotal - withdrawAmount ;
+                // pushing the total value to withdraw field
+                document.getElementById("withdrawn-money").innerText=totalWithdrawn;
+                // pushing the value to total field
+                document.getElementById("total-money").innerText=totalMoneyWith;
+                
+                // console.log("new diposit=",withdrawAmount)
+                // console.log("old diposit=",oldWithdraw)
+                // console.log("total diposit=",totalWithdrawn)
+                // console.log("Old total",oldTotal);
+                // console.log("New Total",totalMoneyWith)
+
+            })
+
             
         </script>
 </body>
