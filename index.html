@@ -26,20 +26,20 @@
             <div class="p-5  row g-5 text d-flex justify-content-center">
               <div class="col">
                <div class="p-3 deposit border-radius">
-                   <h5 id="deposit-money">Deposit</h5>
-                   <h2>$00</h2>
+                   <h5>Deposit</h5>
+                   <h2>$<span  id="deposit-money">00</span></h2>
                </div>
               </div>
               <div class="col">
                 <div class="p-3 withdraw border-radius">
-                    <h5 id="withdraw-money">Withdraw</h5>
-                    <h2>$00</h2>
+                    <h5>Withdraw</h5>
+                    <h2>$<span  id="withdrawn-money">00</span></h2>
                 </div>
               </div>
               <div class="col">
                 <div class="p-3 balance border-radius">
-                    <h5 id="total-money">Balance</h5>
-                    <h2>$1200</h2>
+                    <h5>Balance</h5>
+                    <h2>$<span  id="total-money">1200</span></h2>
                 </div>
                </div>
             </div>
@@ -74,6 +74,38 @@
                 const transaction=document.getElementById("transaction-page");
                 transaction.style.display='block';
             })
+            //Diposit event Handler
+            const dipositClick=document.getElementById("depositClick");
+            dipositClick.addEventListener("click",function(){
+                // taking input value fronm diposit input field
+                let dipositAmount= document.getElementById("money-received").value;
+                dipositAmount=parseFloat(dipositAmount);
+                // restoration of input field
+                document.getElementById("money-received").value="";
+                // accessing the value of old diposit
+                let oldDeposit=document.getElementById("deposit-money").innerText;
+                oldDeposit=parseFloat(oldDeposit);
+                // accessing the value of old total
+                let oldTotal=document.getElementById("total-money").innerText;
+                oldTotal=parseFloat(oldTotal);
+                // calculation of total deposit
+                let totalDeposit=dipositAmount+oldDeposit;
+                // Calculation of total money
+                let totalMoney=oldTotal+dipositAmount;
+                // pushing the total value to diposit field
+                document.getElementById("deposit-money").innerText=totalDeposit;
+                // pushing the value to total field
+                document.getElementById("total-money").innerText=totalMoney;
+                
+                console.log("new diposit=", dipositAmount)
+                console.log("old diposit=",oldDeposit)
+                console.log("total diposit=",totalDeposit)
+                console.log("Old total",oldTotal);
+                console.log("New Total",totalMoney)
+
+            })
+            
+            
         </script>
 </body>
 </html>
