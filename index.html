@@ -8,15 +8,77 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
-        <h1 class="text-center margin-head">Welcome to Cost Calculator</h1>
-        <div class="w-75 mx-auto p-4 mt-5 submit-field">
-            <h4>Login</h4>
-            <br>
-            <input type="email" placeholder="email" class="form-control">
-            <br>
-            <input type="password" placeholder="password" class="form-control">
-            <br>
-            <button class="btn btn-primary" class="form-control">Enter</button>
+        <div id="WelcomePage">
+            <h1 class="text-center margin-head">Welcome to Cost Calculator</h1>
+            <div class="w-75 mx-auto p-4 mt-5 shade border-radius">
+                <h4>Login</h4>
+                <br>
+                <input type="email" placeholder="email" class="form-control">
+                <br>
+                <input type="password" placeholder="password" class="form-control">
+                <br>
+                <button id="submit" class="btn btn-primary" class="form-control">Enter</button>
+            </div>
         </div>
+        <!--Second Page-->
+        <div class="container px-4 mt-5" id="transaction-page">
+            <!--Boxes showing the amount-->
+            <div class="p-5  row g-5 text d-flex justify-content-center">
+              <div class="col">
+               <div class="p-3 deposit border-radius">
+                   <h5 id="deposit-money">Deposit</h5>
+                   <h2>$00</h2>
+               </div>
+              </div>
+              <div class="col">
+                <div class="p-3 withdraw border-radius">
+                    <h5 id="withdraw-money">Withdraw</h5>
+                    <h2>$00</h2>
+                </div>
+              </div>
+              <div class="col">
+                <div class="p-3 balance border-radius">
+                    <h5 id="total-money">Balance</h5>
+                    <h2>$1200</h2>
+                </div>
+               </div>
+            </div>
+            <!--Boxes Showing the inputs-->
+            <div class="container px-4">
+                <div class="row gx-5 m-3">
+                  <div class="col">
+                   <div class="p-3 border-radius shade">
+                       <h5>Deposit</h5>
+                       <input type="text" id="money-received" class="form-control" placeholder="$ amount you want to deposit">
+                       <br>
+                       <button class="btn btn-primary" id="depositClick">Deposit</button>
+                   </div>
+                  </div>
+                  <div class="col">
+                    <div class="p-3 border-radius shade">
+                       <h5>Withdraw</h5>
+                       <input type="text" id="money-withdrawn" class="form-control" placeholder="$ amount you want to withdraw">
+                       <br>
+                       <button class="btn btn-primary" id="withdrawClick">Withdraw</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+        <script>
+            //Login Button Event Handler
+            const submit=document.getElementById("submit");
+            submit.addEventListener("click",function(){
+                const welcome=document.getElementById("WelcomePage");
+                welcome.style.display='none';
+                const transaction=document.getElementById("transaction-page");
+                transaction.style.display='block';
+            })
+            
+            
+            
+            
+
+</script>
 </body>
 </html>
