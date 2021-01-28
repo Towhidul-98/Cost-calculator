@@ -8,14 +8,15 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
+        <!--First Part-->
         <div id="WelcomePage">
             <h1 class="text-center margin-head">Welcome to Cost Calculator</h1>
             <div class="w-75 mx-auto p-4 mt-5 shade border-radius">
                 <h4>Login</h4>
                 <br>
-                <input type="email" placeholder="email" class="form-control">
-                <br>
-                <input type="password" placeholder="password" class="form-control">
+                <input type="text" placeholder="$ Initial Amount You Have" id="initial-balance" class="form-control">
+                <!--<br>
+                <input type="password" placeholder="password" class="form-control">-->
                 <br>
                 <button id="submit" class="btn btn-primary" class="form-control">Enter</button>
             </div>
@@ -39,7 +40,7 @@
               <div class="col">
                 <div class="p-3 balance border-radius">
                     <h5>Balance</h5>
-                    <h2>$<span  id="total-money">1200</span></h2>
+                    <h2>$<span  id="total-money"></span></h2>
                 </div>
                </div>
             </div>
@@ -69,74 +70,49 @@
             //Login Button Event Handler
             const submit=document.getElementById("submit");
             submit.addEventListener("click",function(){
+                const initialBalance=inputTake("initial-balance");
+                document.getElementById("total-money").innerText= initialBalance;
                 const welcome=document.getElementById("WelcomePage");
                 welcome.style.display='none';
                 const transaction=document.getElementById("transaction-page");
                 transaction.style.display='block';
             })
+
             //Diposit event Handler
             const dipositClick=document.getElementById("depositClick");
             dipositClick.addEventListener("click",function(){
-                // taking input value fronm diposit input field
-                let dipositAmount= document.getElementById("money-received").value;
-                dipositAmount=parseFloat(dipositAmount);
-                // restoration of input field
-                document.getElementById("money-received").value="";
-                // accessing the value of old diposit
-                let oldDeposit=document.getElementById("deposit-money").innerText;
-                oldDeposit=parseFloat(oldDeposit);
-                // accessing the value of old total
-                let oldTotal=document.getElementById("total-money").innerText;
-                oldTotal=parseFloat(oldTotal);
-                // calculation of total deposit
-                let totalDeposit=dipositAmount+oldDeposit;
-                // Calculation of total money
-                let totalMoneyDipo=oldTotal+dipositAmount;
-                // pushing the total value to diposit field
-                document.getElementById("deposit-money").innerText=totalDeposit;
-                // pushing the value to total field
-                document.getElementById("total-money").innerText=totalMoneyDipo;
-                
-                // console.log("new diposit=", dipositAmount)
-                // console.log("old diposit=",oldDeposit)
-                // console.log("total diposit=",totalDeposit)
-                // console.log("Old total",oldTotal);
-                // console.log("New Total",totalMoneyDipo)
-
+                let dipositAmount= inputTake("money-received");  // taking input value from diposit input field
+                oldAmountUpdate("deposit-money",dipositAmount);  // accessing the value of old diposit
+                oldAmountUpdate("total-money",dipositAmount);   // accessing the value of old total
             })
 
             //Withdrawn event Handler
             const withdrawClick=document.getElementById("withdrawClick");
             withdrawClick.addEventListener("click",function(){
-                // taking input value from withdraw input field
-                let withdrawAmount= document.getElementById("money-withdrawn").value;
-                withdrawAmount=parseFloat(withdrawAmount);
-                // restoration of input field
-                document.getElementById("money-withdrawn").value="";
-                // accessing the value of old withdraw
-                let oldWithdraw=document.getElementById("withdrawn-money").innerText;
-                oldWithdraw=parseFloat(oldWithdraw);
-                // accessing the value of old total
-                let oldTotal=document.getElementById("total-money").innerText;
+                let withdrawAmount= inputTake("money-withdrawn"); // taking input value from withdraw input field
+                let oldTotal=document.getElementById("total-money").innerText; // accessing the value of old total
                 oldTotal=parseFloat(oldTotal);
-                // calculation of total withdrawn amount
-                let totalWithdrawn = withdrawAmount + oldWithdraw ;
-                // Calculation of total money
-                let totalMoneyWith = oldTotal - withdrawAmount ;
-                // pushing the total value to withdraw field
-                document.getElementById("withdrawn-money").innerText=totalWithdrawn;
-                // pushing the value to total field
-                document.getElementById("total-money").innerText=totalMoneyWith;
-                
-                // console.log("new diposit=",withdrawAmount)
-                // console.log("old diposit=",oldWithdraw)
-                // console.log("total diposit=",totalWithdrawn)
-                // console.log("Old total",oldTotal);
-                // console.log("New Total",totalMoneyWith)
-
+                if(oldTotal>withdrawAmount){
+                    let totalMoneyWith = oldTotal - withdrawAmount ;   // Calculation of total money
+                    oldAmountUpdate("withdrawn-money",withdrawAmount);  // Old withdrawn updated 
+                    document.getElementById("total-money").innerText=totalMoneyWith;
+                }
+                else{
+                    alert("you are not allowed to withdraw");
+                };
             })
-
-            
+            function inputTake(id){
+                let inputAmount= document.getElementById(id).value;   // taking input value from  input field
+                inputAmount=parseFloat(inputAmount);    // string to float conversion
+                document.getElementById(id).value="";  // restoration of input field
+                return inputAmount;   // return the inputAmount
+            }
+            function oldAmountUpdate(id,inputAmount){
+                let oldAmount=document.getElementById(id).innerText; // accessing the value of old withdraw
+                oldAmount=parseFloat(oldAmount);
+                let newAmount= inputAmount + oldAmount ;    // calculation of total withdrawn amount  
+                document.getElementById(id).innerText=newAmount;  // pushing the total value to withdraw field
+            }
         </script>
 </body>
 </html>
